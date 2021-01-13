@@ -1,5 +1,7 @@
 # Codeforces Api
 
+# Introduction
+
 ### Introduction
 
 With Codeforces API you can get access to some of our data in machine-readable JSON format.
@@ -122,3 +124,91 @@ then final result is parseResponse({"status":"OK","response":"..."});.
 {"status":"OK","response":"..."} 와 같은 리턴 값이
 
 parseResponse({"status":"OK","response":"..."}); 와 같이 변하게 됩니다.
+
+# Return objects
+
+### User
+
+Represents a Codeforces user.
+
+코드포스 유저에 대한 정보입니다
+
+|Field	|Description|
+|------|---|
+|handle	|String. Codeforces user handle. 유저의 닉네임|
+|email	|String. Shown only if user allowed to share his contact info. 유저가 개인정보 제공에 동의한 경우 email을 보여줍니다|
+|vkId	|String. User id for VK social network. Shown only if user allowed to share his contact info. 유저가 개인정보 제공에 동의한 경우 VK SNS 아이디를 보여줍니다|
+|openId	|String. Shown only if user allowed to share his contact info.|
+|firstName	|String. Localized. Can be absent.|
+|country	|String. Localized. Can be absent.|
+|city	|String. Localized. Can be absent.|
+|organization	|String. Localized. Can be absent. 소속, 공란 가능, 언어 옵션 선택 가능|
+|contribution	|Integer. User contribution. 유저의 기여도|
+|rank	|String. Localized. 랭크|
+|rating	|Integer. 레이팅|
+|maxRank	|String. Localized. 최대 랭크|
+|maxRating	|Integer. 최고 레이팅|
+|lastOnlineTimeSeconds	|Integer. Time, when user was last seen online, in unix format.|
+|registrationTimeSeconds	|Integer. Time, when user was registered, in unix format.|
+|friendOfCount	|Integer. Amount of users who have this user in friends. 이 유저를 친구로 추가한 유저들의 수|
+|avatar	|String. User's avatar URL.|
+|titlePhoto	|String. User's t itle photo URL.|
+
+### RatingChange
+
+Represents a participation of user in rated contest.
+
+rated되는 contest에 참가한 유저의 참여정보를 보여줍니다
+
+|Field	|Description|
+|----|----|
+|contestId|	Integer. contest의 아이디|
+|contestName|	String. Localized. contest의 이름|
+|handle|	String. Codeforces user handle. 유저의 핸들|
+|rank|	Integer. Place of the user in the contest. This field contains user rank on the moment of rating update. If afterwards rank changes (e.g. someone get disqualified), this field will not be update and will contain old rank. 유저가 몇등을 했는지 보여줍니다. 물론 이는 유저가 최근에 또 다른 rated contest에 참가를 했다면, 최근의 랭크와는 차이가 있을 수 있습니다.|
+|ratingUpdateTimeSeconds|	Integer. Time, when rating for the contest was update, in unix-format.|
+|oldRating|	Integer. User rating before the contest. 이전의 레이팅|
+|newRating|	Integer. User rating after the contest. 이후의 레이팅|
+
+### Contest
+
+Represents a contest on Codeforces.
+
+contest에 대한 정보를 보여줍니다.
+
+|Field|	Description|
+|---|---|
+|id|	Integer.|
+|name|	String. Localized.|
+|type|	Enum: CF, IOI, ICPC. Scoring system used for the contest.|
+|phase|	Enum: BEFORE, CODING, PENDING_SYSTEM_TEST, SYSTEM_TEST, FINISHED.|
+|frozen|	Boolean. If true, then the ranklist for the contest is frozen and shows only submissions, created before freeze.|
+|durationSeconds|	Integer. Duration of the contest in seconds.|
+|startTimeSeconds|	Integer. Can be absent. Contest start time in unix format.|
+|relativeTimeSeconds|	Integer. Can be absent. Number of seconds, passed after the start of the contest. Can be negative.|
+|preparedBy|	String. Can be absent. Handle of the user, how created the contest.|
+|websiteUrl|	String. Can be absent. URL for contest-related website.|
+|description|	String. Localized. Can be absent.|
+|difficulty|	Integer. Can be absent. From 1 to 5. Larger number means more difficult problems.|
+|kind|	String. Localized. Can be absent. Human-readable type of the contest from the following categories: Official ICPC Contest, Official School Contest, Opencup Contest, School/University/City/Region Championship, Training Camp Contest, Official International Personal Contest, Training Contest.|
+|icpcRegion|	String. Localized. Can be absent. Name of the Region for official ICPC contests.|
+|country|	String. Localized. Can be absent.|
+|city|	String. Localized. Can be absent.|
+|season|	String. Can be absent.|
+
+### Problem
+
+Represents a problem.
+
+문제에 대한 정보를 보여줍니다.
+
+|Field|	Description|
+|---|---|
+|contestId|	Integer. Can be absent. Id of the contest, containing the problem.|
+|problemsetName|	String. Can be absent. Short name of the problemset the problem belongs to.|
+|index|	String. Usually a letter of a letter, followed by a digit, that represent a problem index in a contest.|
+|name|	String. Localized.|
+|type|	Enum: PROGRAMMING, QUESTION.|
+|points|	Floating point number. Can be absent. Maximum ammount of points for the problem. 문제를 풀어 얻을 수 있는 점수|
+|rating|	Integer. Can be absent. Problem rating (difficulty). 문제의 난이도|
+|tags|	String list. Problem tags.|
