@@ -212,3 +212,59 @@ Represents a problem.
 |points|	Floating point number. Can be absent. Maximum ammount of points for the problem. 문제를 풀어 얻을 수 있는 점수|
 |rating|	Integer. Can be absent. Problem rating (difficulty). 문제의 난이도|
 |tags|	String list. Problem tags.|
+
+### ProblemStatistics
+
+Represents a statistic data about a problem.
+
+문제에 대한 통계를 보여줍니다.
+
+|Field|	Description|
+|---|---|
+|contestId|	Integer. Can be absent. Id of the contest, containing the problem.|
+|index|	String. Usually a letter of a letter, followed by a digit, that represent a problem index in a contest.|
+|solvedCount|	Integer. Number of users, who solved the problem. 몇명이 풀었는지 보여줍니다.|
+
+### Submission
+
+Represents a submission.
+
+|Field|	Description|
+|---|---|
+|id|	Integer.|
+|contestId|	Integer. Can be absent.|
+|creationTimeSeconds|	Integer. Time, when submission was created, in unix-format.|
+|relativeTimeSeconds|	Integer. Number of seconds, passed after the start of the contest (or a virtual start for virtual parties), before the submission.|
+|problem|	Problem object.|
+|author|	Party object.|
+|programmingLanguage|	String.|
+|verdict|	Enum: FAILED, OK, PARTIAL, COMPILATION_ERROR, RUNTIME_ERROR, WRONG_ANSWER, PRESENTATION_ERROR, TIME_LIMIT_EXCEEDED, MEMORY_LIMIT_EXCEEDED, IDLENESS_LIMIT_EXCEEDED, SECURITY_VIOLATED, CRASHED, INPUT_PREPARATION_CRASHED, CHALLENGED, SKIPPED, TESTING, REJECTED. Can be absent.|
+|testset|	Enum: SAMPLES, PRETESTS, TESTS, CHALLENGES, TESTS1, ..., TESTS10. Testset used for judging the submission.|
+|passedTestCount|	Integer. Number of passed tests.|
+|timeConsumedMillis|	Integer. Maximum time in milliseconds, consumed by solution for one test.|
+|memoryConsumedBytes|	Integer. Maximum memory in bytes, consumed by solution for one test.|
+|points|	Floating point number. Can be absent. Number of scored points for IOI-like contests.|
+
+# Methods
+
+### contest.status
+
+Returns submissions for specified contest. Optionally can return submissions of specified user.
+
+특정 contest에 대한 submissions을 반환합니다.
+특정 유저의 submissions만을 선택적으로 받을 수 있습니다.
+
+|Parameter|	Description|
+|---|---|
+|contestId| (Required)	Id of the contest. It is not the round number. It can be seen in contest URL. For example: /contest/566/status|
+|handle|	Codeforces user handle.|
+|from|	1-based index of the first submission to return.|
+|count|	Number of returned submissions.|
+
+Return value: Returns a list of Submission objects, sorted in decreasing order of submission id.
+
+submission 객체를 반환합니다.
+
+Example: https://codeforces.com/api/contest.status?contestId=566&from=1&count=10
+
+
