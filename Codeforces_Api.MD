@@ -267,4 +267,4 @@ submission 객체를 반환합니다.
 
 Example: https://codeforces.com/api/contest.status?contestId=566&from=1&count=10
 
-
+오타 오역이 있을 수 있습니다!
